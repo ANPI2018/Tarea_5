@@ -96,7 +96,6 @@ function [hi,yi] = rungekuttaError()
 		yi(i) = abs(y-realValue);
 		h=h/2;
 		i=i+1;
-		disp(h);
 	end
 	
 	semilogy(hi,yi, 'linewidth', 1.5);
@@ -105,9 +104,9 @@ function [hi,yi] = rungekuttaError()
 	axis([min(hi), max(hi), min(yi), max(yi)]);
 	#set(gca, 'XTick', [1/1024:127/5120:1/8]); # 5 ticks in the x-axis
   xlabel("h_{i}", "fontweight", "bold");
-  ylabel("y(x)", "fontweight", "bold");
-  s = sprintf("Function evaluated in the interval %u \\leq x \\leq %u \n \
-  \ using different step sizes %s \\leq h \\leq %s", xi, xf, "1/1024", "1/8");
+  ylabel("y(1)", "fontweight", "bold");
+  s = sprintf("Value of the function y'=xy^2 evaluated in x=1 \n \
+  \using different step sizes %s \\leq h \\leq %s","1/1024", "1/8");
   title(s);
   box on;
 
