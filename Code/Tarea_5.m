@@ -102,7 +102,7 @@ function [hi,yi] = rungekuttaError()
 		
 		[x,y] = rungekutta4(@f1,xi,xf,y0,h);
 		hi(i) = h;
-		yi(i) = abs(y-realValue);
+		yi(i) = abs(y(length(y))-realValue);
 		h=h/2;
 		i=i+1;
 	end
