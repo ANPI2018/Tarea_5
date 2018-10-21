@@ -2,9 +2,18 @@
 
 #
 # Ordinary differential equation
+#       y'=x*y^2
 #
 function u = f1(x,y)
 	u = x*(y^2);
+endfunction
+
+#
+# Stiff differential equation
+#      y'=100-y
+#
+function u = f2(x,y)
+	u = 100-y;
 endfunction
 
 
@@ -63,7 +72,7 @@ function [x,y] = rungekutta4(f,xi,xf,y0,h)
   box on;
 
 	x=x_vector;				#Points where the function was evaluated
-	y=y_vector(i-1); 	#Solution in the final point xf
+	y=y_vector; 	#Solution in the final point xf
 endfunction
 
 
@@ -111,3 +120,73 @@ function [hi,yi] = rungekuttaError()
   box on;
 
 endfunction
+
+
+#
+#usage [t1,t2,t3]=stiffEquation()
+#
+# Plots the solution of the stiff differential
+# equation y'=100-y using three different functions
+#
+# Shows the time required by each function and the
+# number of points used.
+#
+function [t1,t2,t3] = stiffEquation()
+
+	xi = 0;
+	xf = 200;
+	y0 = 5;
+	h = xf/1000;
+	
+	rk_t1 = tic;
+	[x,y] = rungekutta4(@f2, xi, xf, y0, h);
+	rk_t2 = toc(rk_t1);
+	
+	ode45_t1 = tic;
+	[x45,y45] = ode45(@f2, [xi, xf], y0);
+	ode45_t2 = toc(ode45_t1);
+	
+	ode23_t1 = tic;
+	[x23,y23] = ode23(@f2, [xi, xf], y0);
+	ode23_t2 = toc(ode23_t1);
+	
+	subplot(2,1,1);
+	hold on;
+	plot(x,y, 'r', 'linewidth', 1.5);
+	plot(x45,y45, 'g', 'linewidth', 1.5);
+	plot(x23,y23, 'b', 'linewidth', 1.5);
+	axis([0,200, 0,101]);
+	
+	xlabel("x_{i}", "fontweight", "bold");
+  ylabel("y(x_{i})", "fontweight", "bold");
+  s = sprintf("Solution of y'=100-y in the interval %u \\leq x \\leq %u", xi, xf);
+  title(s);
+  rk_leg = sprintf("Runge-Kutta\n Time: %u s \nPoints: %u", rk_t2, length(x));
+  ode45_leg = sprintf("ode45\n Time: %u s \nPoints: %u", ode45_t2, length(x45));
+  ode23_leg = sprintf("ode23\n Time: %u s \nPoints: %u", ode23_t2, length(x23));
+  legend(rk_leg, ode45_leg, ode23_leg);
+  legend('boxoff');
+  legend('location', 'northeastoutside');
+	hold off
+	
+	subplot(2,1,2);
+	hold on;
+	plot(x,y, 'r', 'linewidth', 1.5);			#runge-kutta plot
+	plot(x45,y45, 'g', 'linewidth', 1.5);	#ode45 plot
+	plot(x23,y23, 'b', 'linewidth', 1.5);	#ode23 plot
+	
+	axis([100, 200, 99.8, 100.2]);
+	xlabel("x_{i}", "fontweight", "bold");
+  ylabel("y(x_{i})", "fontweight", "bold");
+  s = sprintf("Plot in the interval \n \
+  \ x \\in [100,200] and y \\in [99.8, 100.2]");
+  title(s);
+  legend("rungekutta4", "ode45", "ode23");
+  legend('boxoff');
+  legend('location', 'northeastoutside');
+
+endfunction
+
+
+
+
