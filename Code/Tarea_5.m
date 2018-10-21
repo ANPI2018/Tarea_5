@@ -114,7 +114,7 @@ function [hi,yi] = rungekuttaError()
 	#set(gca, 'XTick', [1/1024:127/5120:1/8]); # 5 ticks in the x-axis
   xlabel("h_{i}", "fontweight", "bold");
   ylabel("y(1)", "fontweight", "bold");
-  s = sprintf("Value of the function y'=xy^2 evaluated in x=1 \n \
+  s = sprintf("Error of the function y'=xy^2 evaluated in x=1 \n \
   \using different step sizes %s \\leq h \\leq %s","1/1024", "1/8");
   title(s);
   box on;
