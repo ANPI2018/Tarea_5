@@ -1,5 +1,6 @@
 ----------------------------------------------------------------------
-Tarea 2						Juan Pablo Brenes Coto
+Tarea 2						
+		  Juan Pablo Brenes Coto
                   Pablo Bustamante Mora
                   Emily Sancho Murillo
 
@@ -66,6 +67,11 @@ Análisis Numérico para Ingeniería		19 Octubre, 2018
                   Runge-Kutta, ode45 y ode23
 ----------------------------------------------------------------------
 
+- Método Runge-Kutta de orden 4: Este método es el que tiene el mayor tiempo de ejecución con 0.152692 s
+aprox, la cantidad de pasos utilizados es de 1001 (esto para cumplir con lo solicitado en el instructivo),  esta cantidad de pasos es hasta 10 veces más grande que la cantidad de pasos utilizados por los otros métodos, lo que diferencia a este método de los otros dos es sin duda alguna la exactitud, ya que como se puede observar en la gráfica "Plot in the interval" del método stiffEquation() prácticamente se elimina la oscilación. Se recomienda como el mejor método para solucionar la EDO si el usuario cuenta con los recursos de procesamiento necesarios y requiere alta precisión. 
 
-	
+-Método ode45:Este método tiene un tiempo de ejecución 0.041532 s, tiene un comportamiento oscilante con una amplitud de aproximada de 0.03 cuya forma podría compararse con el valor absoluto de una onda cosenoidal, este es el método que utiliza la menor cantidad de puntos para resolver la EDO, se recomienda sobre el ode23 ya que se considera superior en cuanto a precisión y estabilidad.
+
+-Método ode23: Este tercer método tiene el menor de los tiempos registrados con 0.035476 s, pero su amplitud, prácticamente constante, y forma muestran un comportamiento muy oscilante, se recomienda en casos donde se requieran tiempos mínimos de ejecución, pero se recomienda considerar su amplitud como un factor a tomar en cuenta en cuanto a estabilidad y precisión de resultado. 
+
 	
